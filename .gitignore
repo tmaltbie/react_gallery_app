@@ -3,6 +3,9 @@
 # other
 mockup
 
+# API
+config.js
+
 # dependencies
 /node_modules
 /.pnp

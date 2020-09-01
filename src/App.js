@@ -29,7 +29,7 @@ class App extends Component {
     this.performSearch()
   }
 
-  performSearch = (tags = 'zen') => {
+  performSearch = (tags = 'herbs') => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
@@ -56,7 +56,7 @@ class App extends Component {
   }
 
   searchCoffee = () => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=coffee+beans&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=coffee+shop&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
@@ -84,13 +84,20 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">   
-          <SearchForm onSearch={this.performSearch}/>
+        <div className="container">
+
+          {/* route for "home" page */}
+          <Route exact path="/" render={()=>{this.performSearch()}}/>
+
+          <SearchForm onSearch={this.performSearch} />
           <Nav />
           { (this.state.loading) ? <p>Loading</p> : <PhotoContainer data={this.state.photos}/> }
+
+          {/* routes for nav "links" */}
           <Route path="/cats" render={() => {this.searchCats()} } />
           <Route path="/coffee" render={() => {this.searchCoffee()} } />
           <Route path="/cows" render={() => {this.searchCows()} } />
+
         </div>
       </Router>
     );

@@ -60,6 +60,15 @@ export default class App extends Component {
               }
             </div>
           )}/>
+          <Route exact path='/cats' render={()=>(
+            <div className="container">
+              { 
+                (this.state.loading) 
+                ? <h2>Loading</h2> 
+                : <PhotoContainer data={this.state.cats}/> 
+              }
+            </div>
+          )}/>
         </Router>
       </div>
     );

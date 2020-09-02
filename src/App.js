@@ -45,10 +45,15 @@ export default class App extends Component {
     this.performSearch('pangolin','photos')
   }
 
+  componentDidUpdate() {
+    this.performSearch('cats', 'cats')
+  }
+
   render() {
     return (
       <div>
         <Router>
+
           <SearchForm onSearch={this.performSearch} />
           <Nav />
           <Route exact path='/' render={()=>(

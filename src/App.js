@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {
-  BrowserRouter as Router,
   Route,
   Switch
 } from "react-router-dom";
 import { withRouter } from "react-router";
-
 
 //https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
 
@@ -15,15 +13,13 @@ import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
 
-export default class App extends Component {
+class App extends Component {
 
   constructor() {
     super();
     this.state = {
       photos: [],
       cats: [],
-      coffee: [],
-      cows: [],
       loading: true
     }
   }
@@ -46,14 +42,13 @@ export default class App extends Component {
     this.performSearch('pangolin','photos')
   }
 
-  componentDidUpdate() {
-    this.performSearch('cats', 'cats')
-  }
+  // componentDidUpdate() {
+  //   this.performSearch('cats', 'cats')
+  // }
 
   render() {
     return (
       <div>
-        <Router>
           {/* For later: Switch goes here, maybe??? */}
           <SearchForm onSearch={this.performSearch} />
           <Nav />
@@ -61,7 +56,7 @@ export default class App extends Component {
             <div className="container">
               { 
                 (this.state.loading) 
-                ? <h2>Loading</h2> 
+                ? <h2>Loading...</h2> 
                 : <PhotoContainer data={this.state.photos}/> 
               }
             </div>
@@ -75,10 +70,9 @@ export default class App extends Component {
               }
             </div>
           )}/>
-        </Router>
       </div>
     );
   }
 }
 
-const AppWithRouter = withRouter(App)
+export default withRouter(App)

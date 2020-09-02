@@ -14,8 +14,9 @@ const PhotoContainer = props => {
   } else {
     photos = <NotFound />
   }
- 
+  
   return (
+    
     <div className="photo-container">
       <h2>Results</h2>
       <ul>

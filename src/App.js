@@ -41,6 +41,7 @@ export default class App extends Component {
       })
   }
 
+  // initial call of API to show some images upon load
   componentDidMount() {
     this.performSearch('pangolin','photos')
   }
@@ -53,7 +54,7 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-
+          {/* For later: Switch goes here, maybe??? */}
           <SearchForm onSearch={this.performSearch} />
           <Nav />
           <Route exact path='/' render={()=>(

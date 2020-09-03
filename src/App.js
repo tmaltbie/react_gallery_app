@@ -16,11 +16,11 @@ import PhotoContainer from './Components/PhotoContainer';
 class App extends Component {
 
   state = {
-      photos: [],
-      cats: [],
-      coffee: [],
-      cows: [],
-      loading: true
+    photos: [],
+    cats: [],
+    coffee: [],
+    cows: [],
+    loading: true
     }
 
   // performSearch = (query,property) => {
@@ -104,10 +104,11 @@ class App extends Component {
   render() {
     console.log(this.state)
     return (
+      
       <div>
-          {/* For later: Switch goes here, maybe??? */}
           <SearchForm onSearch={this.performSearch} />
           <Nav />
+        <Switch>
           <Route exact path='/' render={()=>(
             <div className="container">
               { 
@@ -117,7 +118,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route exact path='/cats' render={()=>(
+          <Route path='/cats' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -126,7 +127,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route exact path='/coffee' render={()=>(
+          <Route path='/coffee' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -135,7 +136,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route exact path='/cows' render={()=>(
+          <Route path='/cows' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -144,7 +145,9 @@ class App extends Component {
               }
             </div>
           )}/>
+          </Switch>
       </div>
+
     );
   }
 }

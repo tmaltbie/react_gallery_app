@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {
+  Route,
   Link
 } from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
   
   state = {
     searchText: ''
@@ -21,6 +23,7 @@ export default class SearchForm extends Component {
 
   render() {
     return (
+      
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input  type="search" 
                 name="search" 
@@ -35,6 +38,9 @@ export default class SearchForm extends Component {
           </svg>
         </button>
       </form>
+
     )
   }
 }
+
+export default withRouter(SearchForm)

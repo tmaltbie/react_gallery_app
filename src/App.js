@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {
   Route,
-  Switch
+  Switch,
+  Link,
+  Redirect
 } from "react-router-dom";
 import { withRouter } from "react-router";
 
@@ -17,7 +19,7 @@ import NotFound from './Components/NotFound';
 class App extends Component {
 
   state = {
-    photos: [],
+    search: [],
     cats: [],
     coffee: [],
     cows: [],
@@ -41,8 +43,9 @@ class App extends Component {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({ 
-          photos: response.data.photos.photo,
-          loading: false
+          search: response.data.photos.photo,
+          loading: false,
+          query: query 
         })
       })
       .catch(error => {
@@ -90,7 +93,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.performSearch('pangolin')
+    this.performSearch()
     this.catSearch()
     this.coffeeSearch()
     this.cowsSearch()
@@ -105,15 +108,16 @@ class App extends Component {
   render() {
     return (
       <div>
-          <SearchForm onSearch={this.performSearch} />
-          <Nav />
+        <SearchForm onSearch={this.performSearch}/>
+        <Nav />
         <Switch>
-          <Route exact path='/' render={()=>(
+          <Route exact path="/" render={() => <Redirect to="/cats"/>}/>
+          <Route path='/search/:query' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
                 ? <h2>Loading...</h2> 
-                : <PhotoContainer data={this.state.photos}/> 
+                : <PhotoContainer data={this.state.search}/> 
               }
             </div>
           )}/>

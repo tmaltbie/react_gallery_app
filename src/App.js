@@ -15,20 +15,32 @@ import PhotoContainer from './Components/PhotoContainer';
 
 class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
+  state = {
       photos: [],
       cats: [],
+      coffee: [],
+      cows: [],
       loading: true
     }
-  }
 
-  performSearch = (query,property) => {
+  // performSearch = (query,property) => {
+  //   axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+  //     .then(response => {
+  //       this.setState({ 
+  //         [property]: response.data.photos.photo,
+  //         loading: false
+  //       })
+  //     })
+  //     .catch(error => {
+  //       console.log('uh-oh there has been an error', error)
+  //     })
+  // }
+
+  performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
-        this.setState({
-          [property]: response.data.photos.photo,
+        this.setState({ 
+          photos: response.data.photos.photo,
           loading: false
         })
       })
@@ -37,16 +49,60 @@ class App extends Component {
       })
   }
 
-  // initial call of API to show some images upon load
+  catSearch = () => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          cats: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
+  coffeeSearch = () => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=coffee+beans&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          coffee: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
+  cowsSearch = () => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cows&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          cows: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
   componentDidMount() {
-    this.performSearch('pangolin','photos')
+    this.performSearch('pangolin')
+    this.catSearch()
+    this.coffeeSearch()
+    this.cowsSearch()
   }
 
   // componentDidUpdate() {
-  //   this.performSearch('cats', 'cats')
+  //   if (this.state === ) {
+  //     this.performSearch('cats', 'cats')
+  //   }
   // }
 
   render() {
+    console.log(this.state)
     return (
       <div>
           {/* For later: Switch goes here, maybe??? */}
@@ -67,6 +123,24 @@ class App extends Component {
                 (this.state.loading) 
                 ? <h2>Loading</h2> 
                 : <PhotoContainer data={this.state.cats}/> 
+              }
+            </div>
+          )}/>
+          <Route exact path='/coffee' render={()=>(
+            <div className="container">
+              { 
+                (this.state.loading) 
+                ? <h2>Loading</h2> 
+                : <PhotoContainer data={this.state.coffee}/> 
+              }
+            </div>
+          )}/>
+          <Route exact path='/cows' render={()=>(
+            <div className="container">
+              { 
+                (this.state.loading) 
+                ? <h2>Loading</h2> 
+                : <PhotoContainer data={this.state.cows}/> 
               }
             </div>
           )}/>

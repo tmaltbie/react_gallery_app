@@ -12,6 +12,7 @@ import apiKey from './config'
 import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
+import NotFound from './Components/NotFound';
 
 class App extends Component {
 
@@ -102,9 +103,7 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state)
     return (
-      
       <div>
           <SearchForm onSearch={this.performSearch} />
           <Nav />
@@ -145,9 +144,9 @@ class App extends Component {
               }
             </div>
           )}/>
-          </Switch>
+          <Route> <NotFound /> </Route>
+        </Switch>
       </div>
-
     );
   }
 }

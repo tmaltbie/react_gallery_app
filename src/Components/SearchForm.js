@@ -22,8 +22,9 @@ class SearchForm extends Component {
   }
 
   render() {
+    console.log(this.props.location.pathname);
     return (
-      
+      <Route >
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input  type="search" 
                 name="search" 
@@ -38,7 +39,7 @@ class SearchForm extends Component {
           </svg>
         </button>
       </form>
-
+    </Route>
     )
   }
 }

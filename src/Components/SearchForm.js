@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
 class SearchForm extends Component {
@@ -26,9 +22,12 @@ class SearchForm extends Component {
     console.log("pathname: " + this.props.location.pathname);
     console.log("match: " + this.props.match.url);
     console.log("query: " + this.state.query)
+
+    
     return (
-      
+
       <form className="search-form" onSubmit={this.handleSubmit}>
+  
         <input  type="search" 
                 name="search" 
                 placeholder="Search"
@@ -41,6 +40,8 @@ class SearchForm extends Component {
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
         </button>
+       
+        <Redirect to={`/search/${this.state.query}`} />
     </form>
 
     )

@@ -23,7 +23,8 @@ class App extends Component {
     cats: [],
     coffee: [],
     cows: [],
-    loading: true
+    loading: true,
+    query: ''
     }
 
   // performSearch = (query,property) => {
@@ -40,6 +41,7 @@ class App extends Component {
   // }
 
   catSearch = (query = "cats") => {
+    this.setState({loading: true})
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({ 
@@ -53,6 +55,7 @@ class App extends Component {
   }
 
   coffeeSearch = (query = "coffee+beans") => {
+    this.setState({loading: true})
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({ 
@@ -66,6 +69,7 @@ class App extends Component {
   }
 
   cowsSearch = (query = "cows") => {
+    this.setState({loading: true})
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({ 
@@ -79,6 +83,7 @@ class App extends Component {
   }
 
   performSearch = (query) => {
+    this.setState({loading: true})
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({ 
@@ -96,7 +101,7 @@ class App extends Component {
     this.catSearch()
     this.coffeeSearch()
     this.cowsSearch()
-    this.performSearch('zion')
+    this.performSearch()
   }
 
   // componentDidUpdate() {
@@ -106,22 +111,15 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state.query)
     return (
       <div>
         <SearchForm onSearch={this.performSearch} query={this.state.query}/>
         <Nav />
         <Switch>
           <Route exact path="/" render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading...</h2> 
-                : <PhotoContainer data={this.state.search}/> 
-              }
-            </div>
+            <Redirect to="/cats"/>
           )}/>
-          <Route path='/search/:query' render={()=>(
+          <Route path={`/search/${this.state.query}`} render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 

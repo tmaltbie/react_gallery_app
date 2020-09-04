@@ -101,7 +101,7 @@ class App extends Component {
     this.catSearch()
     this.coffeeSearch()
     this.cowsSearch()
-    this.performSearch()
+    this.performSearch('dumplings')
   }
 
   // componentDidUpdate() {
@@ -116,8 +116,14 @@ class App extends Component {
         <SearchForm onSearch={this.performSearch} query={this.state.query}/>
         <Nav />
         <Switch>
-          <Route exact path="/" render={()=>(
-            <Redirect to="/cats"/>
+        <Route exact path='/' render={()=>(
+            <div className="container">
+              { 
+                (this.state.loading) 
+                ? <h2>Loading</h2> 
+                : <PhotoContainer data={this.state.search}/> 
+              }
+            </div>
           )}/>
           <Route path={`/search/${this.state.query}`} render={()=>(
             <div className="container">

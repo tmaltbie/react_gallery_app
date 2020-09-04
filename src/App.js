@@ -39,6 +39,45 @@ class App extends Component {
   //     })
   // }
 
+  catSearch = (query = "cats") => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          cats: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
+  coffeeSearch = (query = "coffee+beans") => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          coffee: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
+  cowsSearch = (query = "cows") => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => {
+        this.setState({ 
+          cows: response.data.photos.photo,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log('uh-oh there has been an error', error)
+      })
+  }
+
   performSearch = (query) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&content_type=1&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
@@ -53,50 +92,11 @@ class App extends Component {
       })
   }
 
-  catSearch = () => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&content_type=1&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => {
-        this.setState({ 
-          cats: response.data.photos.photo,
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log('uh-oh there has been an error', error)
-      })
-  }
-
-  coffeeSearch = () => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=coffee+beans&content_type=1&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => {
-        this.setState({ 
-          coffee: response.data.photos.photo,
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log('uh-oh there has been an error', error)
-      })
-  }
-
-  cowsSearch = () => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cows&content_type=1&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => {
-        this.setState({ 
-          cows: response.data.photos.photo,
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log('uh-oh there has been an error', error)
-      })
-  }
-
   componentDidMount() {
-    this.performSearch()
     this.catSearch()
     this.coffeeSearch()
     this.cowsSearch()
+    this.performSearch('zion')
   }
 
   // componentDidUpdate() {
@@ -106,12 +106,21 @@ class App extends Component {
   // }
 
   render() {
+    console.log(this.state.query)
     return (
       <div>
-        <SearchForm onSearch={this.performSearch}/>
+        <SearchForm onSearch={this.performSearch} query={this.state.query}/>
         <Nav />
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/cats"/>}/>
+          <Route exact path="/" render={()=>(
+            <div className="container">
+              { 
+                (this.state.loading) 
+                ? <h2>Loading...</h2> 
+                : <PhotoContainer data={this.state.search}/> 
+              }
+            </div>
+          )}/>
           <Route path='/search/:query' render={()=>(
             <div className="container">
               { 

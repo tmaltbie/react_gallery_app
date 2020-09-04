@@ -10,7 +10,7 @@ const PhotoContainer = props => {
   if (results.length>0) {
     photos = results.map(photo => 
       <Photo 
-        url={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`} 
+        url={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`} 
         key={photo.id}/>  
     );
   } else {

@@ -14,7 +14,7 @@ import apiKey from './config'
 import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
-import NotFound from './Components/NotFound';
+import Error404 from './Components/Error404';
 
 class App extends Component {
 
@@ -23,8 +23,7 @@ class App extends Component {
     cats: [],
     coffee: [],
     cows: [],
-    loading: true,
-    query: ''
+    loading: true
     }
 
   // performSearch = (query,property) => {
@@ -101,7 +100,7 @@ class App extends Component {
     this.catSearch()
     this.coffeeSearch()
     this.cowsSearch()
-    this.performSearch('dumplings')
+    this.performSearch('longhorns')
   }
 
   // componentDidUpdate() {
@@ -116,16 +115,8 @@ class App extends Component {
         <SearchForm onSearch={this.performSearch} query={this.state.query}/>
         <Nav />
         <Switch>
-        <Route exact path='/' render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading</h2> 
-                : <PhotoContainer data={this.state.search}/> 
-              }
-            </div>
-          )}/>
-          <Route path={`/search/${this.state.query}`} render={()=>(
+
+          <Route exact path={`/search/${this.state.query}`} render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -134,7 +125,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route path='/cats' render={()=>(
+          <Route exact path='/cats' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -143,7 +134,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route path='/coffee' render={()=>(
+          <Route exact path='/coffee' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -152,7 +143,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route path='/cows' render={()=>(
+          <Route exact path='/cows' render={()=>(
             <div className="container">
               { 
                 (this.state.loading) 
@@ -161,7 +152,7 @@ class App extends Component {
               }
             </div>
           )}/>
-          <Route> <NotFound /> </Route>
+          <Route path='/' render={()=> (<Error404 />)} />
         </Switch>
       </div>
     );

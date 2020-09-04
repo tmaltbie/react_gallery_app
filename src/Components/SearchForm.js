@@ -11,7 +11,7 @@ class SearchForm extends Component {
   onSearchChange = e => {
     this.setState({searchText: e.target.value})
   }
-
+  
   handleSubmit = e => {
     e.preventDefault();
     this.props.onSearch(this.tags.value);
@@ -20,14 +20,10 @@ class SearchForm extends Component {
 
   render() {
     console.log("pathname: " + this.props.location.pathname);
-    console.log("match: " + this.props.match.url);
-    console.log("query: " + this.state.query)
+    console.log("query: " + this.props.query)
 
-    
     return (
-
       <form className="search-form" onSubmit={this.handleSubmit}>
-  
         <input  type="search" 
                 name="search" 
                 placeholder="Search"
@@ -40,8 +36,7 @@ class SearchForm extends Component {
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
         </button>
-       
-        <Redirect to={`/search/${this.state.query}`} />
+        <Redirect to={`/search/${this.props.query}`} />
     </form>
 
     )

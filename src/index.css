@@ -3,7 +3,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #2a3c4f;
   background-color: #bdacbd;
-  /* #c7b3bd . c4a6b7; */
 }
 
 h2 {
@@ -30,7 +29,7 @@ a {
 .search-form button {
   outline: none;
   background-color: #e07113;
-  border: 1px dotted black;
+  border: 1px solid black;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
   cursor: pointer;
@@ -39,13 +38,13 @@ a {
 input {
   font-size: 1em;
   width: 100%;
-  background-color: #edeff0;
+  background-color: #efe9e7;
   padding: 10px 15px;
   border: 3px solid #d7dbdf;
   border-right: none;
   border-radius: 0.35em 0 0 0.35em;
   outline: none;
-  border: 1px dotted black;
+  border: 1px solid black;
 }
 
 .main-nav li {
@@ -58,14 +57,14 @@ input {
   background:	#e07113;
   border-radius: 3px;
   padding: 5px;
-  border: 1px dotted black;
-  color: #fff;
+  border: 1px solid black;
+  color: #efe9e7;
 }
 
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color: #2a3c4f;
 }
 
 .photo-container ul {

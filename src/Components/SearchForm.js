@@ -18,10 +18,13 @@ class SearchForm extends Component {
     e.currentTarget.reset();
   }
 
-  render() {
-    console.log("pathname: " + this.props.location.pathname);
-    console.log("query: " + this.props.query)
+  componentDidUpdate(prevState) {
+    if (prevState.searchText !== this.state.searchText) {
+      console.log('state has changed')
+    }
+  }
 
+  render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input  type="search" 

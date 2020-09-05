@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 class SearchForm extends Component {
   
   state = {
-    searchText: ''
+    searchText: this.props.query
   }
 
   onSearchChange = e => {
@@ -20,7 +20,7 @@ class SearchForm extends Component {
 
   componentDidUpdate(prevState) {
     if (prevState.searchText !== this.state.searchText) {
-      console.log('state has changed')
+      console.log('state changed')
     }
   }
 

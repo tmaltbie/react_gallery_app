@@ -111,48 +111,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <SearchForm onSearch={this.performSearch} query={this.state.query}/>
+      <div className="container">
+        <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.state.loading}/>
         <Nav />
         <Switch>
-
-          <Route exact path={`/search/${this.state.query}`} render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading...</h2> 
-                : <PhotoContainer data={this.state.search}/> 
-              }
-            </div>
-          )}/>
-          <Route exact path='/cats' render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading</h2> 
-                : <PhotoContainer data={this.state.cats}/> 
-              }
-            </div>
-          )}/>
-          <Route exact path='/coffee' render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading</h2> 
-                : <PhotoContainer data={this.state.coffee}/> 
-              }
-            </div>
-          )}/>
-          <Route exact path='/cows' render={()=>(
-            <div className="container">
-              { 
-                (this.state.loading) 
-                ? <h2>Loading</h2> 
-                : <PhotoContainer data={this.state.cows}/> 
-              }
-            </div>
-          )}/>
-          <Route path='/' render={()=> (<Error404 />)} />
+          <Route exact path='/cats' render={()=>(<PhotoContainer data={this.state.cats} loading={this.state.loading}/> )}/>
+          <Route exact path='/coffee' render={()=>(<PhotoContainer data={this.state.coffee} loading={this.state.loading}/> )}/>
+          <Route exact path='/cows' render={()=>(<PhotoContainer data={this.state.cows} loading={this.state.loading}/> )}/>
+          <Route exact path={`/search/${this.state.query}`} render={()=>(<PhotoContainer data={this.state.search} loading={this.state.loading}/> )}/>
+          <Route path='/' render={()=> (<Error404/>)} />
         </Switch>
       </div>
     );

@@ -120,7 +120,7 @@ class App extends Component {
           <Route path='/cats' render={()=>(<PhotoContainer data={this.state.cats} loading={this.state.loading}/> )}/>
           <Route path='/coffee' render={()=>(<PhotoContainer data={this.state.coffee} loading={this.state.loading}/> )}/>
           <Route path='/cows' render={()=>(<PhotoContainer data={this.state.cows} loading={this.state.loading}/> )}/>
-          <Route path='/' render={()=> (<Error404/>)} />
+          <Route path='/' component={<Error404/>} />
         </Switch>
       </div>
     );

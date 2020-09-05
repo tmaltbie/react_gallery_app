@@ -39,7 +39,7 @@ class SearchForm extends Component {
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
         </button>
-        <Redirect to={`/search/${this.props.query}`} />
+        {/* <Redirect to={`/search/${this.props.query}`} /> */}
     </form>
 
     )

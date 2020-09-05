@@ -23,7 +23,8 @@ class App extends Component {
     cats: [],
     coffee: [],
     cows: [],
-    loading: true
+    loading: true,
+    query: ''
     }
 
   // performSearch = (query,property) => {
@@ -115,12 +116,12 @@ class App extends Component {
         <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.state.loading}/>
         <Nav />
         <Switch>
-          <Route exact path='/' render={()=>(<PhotoContainer data={this.state.search} loading={this.state.loading}/> )}/> 
-          <Route path='/search' render={()=>(<PhotoContainer data={this.state.search} loading={this.state.loading}/> )}/> 
-          <Route path='/cats' render={()=>(<PhotoContainer data={this.state.cats} loading={this.state.loading}/> )}/>
-          <Route path='/coffee' render={()=>(<PhotoContainer data={this.state.coffee} loading={this.state.loading}/> )}/>
-          <Route path='/cows' render={()=>(<PhotoContainer data={this.state.cows} loading={this.state.loading}/> )}/>
-          <Route path='/' component={<Error404/>} />
+          <Route exact path='/' render={()=>(<PhotoContainer data={this.state.search} loading={this.state.loading} query={this.state.query} /> )}/> 
+          <Route path={`/search/${this.state.query}`} render={()=>(<PhotoContainer data={this.state.search} loading={this.state.loading} /> )}/> 
+          <Route path='/cats' render={()=>(<PhotoContainer data={this.state.cats} loading={this.state.loading} /> )}/>
+          <Route path='/coffee' render={()=>(<PhotoContainer data={this.state.coffee} loading={this.state.loading} /> )}/>
+          <Route path='/cows' render={()=>(<PhotoContainer data={this.state.cows} loading={this.state.loading} /> )}/>
+          <Route path='/' component={Error404} />
         </Switch>
       </div>
     );

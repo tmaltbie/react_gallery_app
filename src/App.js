@@ -13,6 +13,7 @@ import Error404 from './Components/Error404';
 
 class App extends Component {
 
+  // initial states for search results, three nav link searches, and loading state
   state = {
     search: [],
     cats: [],
@@ -71,6 +72,7 @@ class App extends Component {
       })
   }
 
+  // search for images includes loading state for moment between API fetch and displaying results
   performSearch = (query) => {
     this.setState({
       loading: true
@@ -104,6 +106,5 @@ class App extends Component {
     );
   }
 }
-// ${this.state.query}
 
 export default withRouter(App)

@@ -12,12 +12,14 @@ class PhotoContainer extends Component {
     const results = this.props.data;
     let photos;
 
+    // while API fetch gets data, show Loading screen instead of "not found"
     if (this.props.loading) {
       return (
         <h2>Loading...</h2>
       )
     }
     
+    // if there are results, display them, includes unique key ID for React 
     if (results.length>0) {
       photos = results.map(photo => 
         <Photo 

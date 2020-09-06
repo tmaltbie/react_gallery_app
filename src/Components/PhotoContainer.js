@@ -8,6 +8,7 @@ class PhotoContainer extends Component {
     loading: this.props.loading
   }
   render() {
+
     const results = this.props.data;
     let photos;
 

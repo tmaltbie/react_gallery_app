@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 
 class SearchForm extends Component {
   
   state = {
-    searchText: this.props.query
+    searchText: ''
   }
 
   onSearchChange = e => {
@@ -14,24 +13,23 @@ class SearchForm extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onSearch(this.tags.value);
+    this.props.history.replace('/search');
+    this.props.onSearch(this.state.searchText);
+    let path = `search/${this.state.searchText}`;
+    this.props.history.push(path);
     e.currentTarget.reset();
   }
 
-  componentDidUpdate(prevState) {
-    if (prevState.searchText !== this.state.searchText) {
-      console.log('state changed')
-    }
-  }
+  
 
   render() {
-    return (
+    return ( 
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input  type="search" 
                 name="search" 
                 placeholder="Search"
                 onChange={this.onSearchChange}
-                ref={(input) => this.tags = input}
+                // ref={(input) => this.tags = input}
                 required />
         <button type="submit" className="search-button">
           <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -39,9 +37,7 @@ class SearchForm extends Component {
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
         </button>
-        {/* <Redirect to={`/search/${this.props.query}`} /> */}
     </form>
-
     )
   }
 }

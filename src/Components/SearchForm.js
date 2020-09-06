@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom';
 
+// updates the URL based on search 
 class SearchForm extends Component {
   
   state = {
@@ -20,7 +21,6 @@ class SearchForm extends Component {
     e.currentTarget.reset();
   }
 
-  
 
   render() {
     return ( 

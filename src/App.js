@@ -21,7 +21,7 @@ class App extends Component {
     loading: true
     }
 
-    // populate images for nav links and initial page load
+  // populate images for nav links and defult images upon initial load of the site
   componentDidMount() {
     this.catSearch()
     this.coffeeSearch()
